@@ -43,7 +43,6 @@
                     <span class="user">
                         <p>Id: ${user.getId()}</p>
                         <p>Name: ${user.getUsername()}</p>
-                        <p>Password: ${user.getPassword()}</p>
 
                         <form action="admin/delete" method="post">
                             <input type="hidden" name="id" value="${user.getId()}">

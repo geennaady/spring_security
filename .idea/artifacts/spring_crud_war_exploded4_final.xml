@@ -1,12 +1,22 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="spring_crud:war exploded2">
-    <output-path>$PROJECT_DIR$/out/artifacts/spring_crud_war_exploded2</output-path>
+  <artifact type="exploded-war" name="spring_crud:war exploded4 final">
+    <output-path>$PROJECT_DIR$/out/artifacts/spring_crud_war_exploded4_final</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="spring_crud" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.2" />
+          <element id="library" level="project" name="Maven: org.glassfish.jaxb:txw2:2.3.2" />
+          <element id="library" level="project" name="Maven: com.sun.istack:istack-commons-runtime:3.0.8" />
+          <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.8.1" />
+          <element id="library" level="project" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.16" />
+          <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:1.2.1" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
+          <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0" />
+          <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.2.0.RELEASE" />
@@ -34,6 +44,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:5.0.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.1.RELEASE" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.19" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="spring_crud/web/Web" />
