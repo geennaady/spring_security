@@ -2,15 +2,14 @@ package web.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import web.dao.RoleDao;
 import web.dao.RoleDaoImpl;
@@ -20,7 +19,9 @@ import web.service.MyUserDetailService;
 import web.service.RoleService;
 import web.service.RoleServiceImpl;
 
+
 @Configuration
+@ComponentScan("web")
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -32,14 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new MyUserDetailService();
     }
 
-    @Bean
-    public AuthenticationPrincipalArgumentResolver authenticationPrincipalArgumentResolver() {
-        return new AuthenticationPrincipalArgumentResolver();
-    }
-
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(daoAuthenticationProvider());
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(bCryptEncoder());
     }
 
     @Bean
@@ -50,15 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public RoleDao getRoleDao() {
         return new RoleDaoImpl();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(bCryptEncoder());
-
-        return daoAuthenticationProvider;
     }
 
     @Override

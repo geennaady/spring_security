@@ -18,9 +18,6 @@ public class UserDaoImpl implements UserDao<User> {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public List<User> listUsers() {
         return sessionFactory.getCurrentSession().createQuery("from User").list();

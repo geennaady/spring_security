@@ -14,9 +14,6 @@ public class UserServiceImpl implements UserService<User> {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptEncoder;
-
     @Transactional(readOnly = true)
     @Override
     public List<User> listUsers() { return userDao.listUsers(); }
@@ -24,14 +21,12 @@ public class UserServiceImpl implements UserService<User> {
     @Transactional
     @Override
     public void addUser(User user) {
-        user.setPassword(bCryptEncoder.encode(user.getPassword()));
         userDao.addUser(user);
     }
 
     @Transactional
     @Override
     public void updateUser(User user) {
-        user.setPassword(bCryptEncoder.encode(user.getPassword()));
         userDao.updateUser(user);
     }
 
