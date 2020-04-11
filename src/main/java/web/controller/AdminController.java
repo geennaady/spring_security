@@ -40,15 +40,11 @@ public class AdminController {
     @RequestMapping(value = "admin/add", method = RequestMethod.POST)
     public ModelAndView saveUser(@ModelAttribute User user, @RequestParam Long role) {
         ModelAndView model = null;
-        boolean flag = true;
 
         if (user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
             model = new ModelAndView("redirect:/admin/error");
             model.addObject("message", "Enter the name or pass");
-            flag = false;
-        }
-
-        if(flag) {
+        } else {
             try {
                 user.setRoles(roleService.getAuthorityById(role));
                 user.setPassword(bCryptEncoder.encode(user.getPassword()));
@@ -85,7 +81,6 @@ public class AdminController {
     @RequestMapping(value = "admin/update", method = RequestMethod.POST)
     public ModelAndView updateUser(@ModelAttribute User user, @RequestParam Long role) {
         ModelAndView model = new ModelAndView("redirect:/admin");;
-        boolean flag = true;
 
         if (user.getUsername().isEmpty()) {
             User userForOldName = (User) userService.getUserById(user.getId());
@@ -95,10 +90,7 @@ public class AdminController {
         if(user.getPassword().isEmpty()) {
             User userForPass = (User) userService.getUserById(user.getId());
             user.setPassword(userForPass.getPassword());
-            flag = false;
-        }
-
-        if(flag) {
+        } else {
             user.setPassword(bCryptEncoder.encode(user.getPassword()));
         }
 

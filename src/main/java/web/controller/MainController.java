@@ -60,7 +60,7 @@ public class MainController {
 			user.setRoles(roleService.getAuthorityById(2L));
 			userService.addUser(user);
 		} catch (Exception e) {
-			model.addAttribute("message", "Пользователь с таким именем уже существует");
+			model.addAttribute("message", "That name is already own");
 			return "error";
 		}
 
