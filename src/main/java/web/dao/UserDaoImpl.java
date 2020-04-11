@@ -28,22 +28,11 @@ public class UserDaoImpl implements UserDao<User> {
 
     @Override
     public void addUser(User user) {
-        Set<Role> userRole = new HashSet<>();
-        Role role = new Role(2L, "ROLE_USER");
-        userRole.add(role);
-
-        user.setRoles(userRole);
-
         sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
     public void updateUser(User user) {
-        Set<Role> userRole = new HashSet<>();
-        Role role = new Role(2L, "ROLE_USER");
-        userRole.add(role);
-        user.setRoles(userRole);
-
         sessionFactory.getCurrentSession().update(user);
     }
 

@@ -37,12 +37,16 @@
     }
 </style>
 <body>
-        <a href="/logout">Logout</a>
+        <a href="/logout">Logout</a><br>
+        <a href="/user">User</a>
         <div id="grid">
             <c:forEach var="user" items="${users}" >
                     <span class="user">
                         <p>Id: ${user.getId()}</p>
                         <p>Name: ${user.getUsername()}</p>
+                        <p>Role: <c:forEach var="role" items="${user.getAllRoles()}">
+                            <p>${role}</p>
+                        </c:forEach></p>
 
                         <form action="admin/delete" method="post">
                             <input type="hidden" name="id" value="${user.getId()}">
@@ -51,8 +55,6 @@
                 <%--убрать поля--%>
                         <form action="admin/update" method="get">
                             <input type="hidden" name="id" value="${user.getId()}">
-                            <input type="hidden" name="name" value="${user.getUsername()}">
-                            <input type="hidden" name="pass" value="${user.getPassword()}">
                             <input class="butt" type="submit" value="Change">
                         </form>
                     </span>
@@ -65,6 +67,10 @@
                         <br>
                         <p>Password: <form:input path="password"/></p>
                         <br>
+                        <p>New Role</p><select name="role">
+                            <option value="1">Admin</option>
+                            <option value="2">User</option>
+                        </select>
                         <button type="submit">Add me</button>
                     </span>
             </form:form>

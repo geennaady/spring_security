@@ -12,9 +12,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import web.dao.RoleDao;
+import web.dao.RoleDaoImpl;
 import web.security.handler.LoginSuccessHandler;
 import web.security.handler.MyAccessDeniedHandler;
 import web.service.MyUserDetailService;
+import web.service.RoleService;
+import web.service.RoleServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -39,6 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public RoleService getRoleService() {
+        return new RoleServiceImpl();
+    }
+
+    @Bean
+    public RoleDao getRoleDao() {
+        return new RoleDaoImpl();
+    }
+
+    @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
@@ -58,9 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 // Указываем параметры логина и пароля с формы логина
                 .usernameParameter("j_username")
-                .passwordParameter("j_password")
-                // даем доступ к форме логина всем
-                .permitAll(); //todo anonymous
+                .passwordParameter("j_password");
 
         http.logout()
                 // разрешаем делать логаут всем

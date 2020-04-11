@@ -1,9 +1,7 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -12,18 +10,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import web.model.User;
+import web.service.RoleService;
 import web.service.UserService;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class HelloController {
+public class MainController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private RoleService roleService;
 
 	@GetMapping(value = "/")
 	public String printWelcome(ModelMap model) {
@@ -38,39 +39,13 @@ public class HelloController {
 
     @GetMapping(value = "login")
     public String loginPage(@AuthenticationPrincipal User user) {
-		Collection <? extends GrantedAuthority> authority = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-
-		if(user != null) {
-			for(GrantedAuthority role : authority) {
-				if(role.getAuthority().equals("ROLE_USER")) {
-					return "redirect:/user";
-				}
-
-				if(role.getAuthority().equals("ROLE_ADMIN")) {
-					return "redirect:/admin";
-				}
-			}
-		}
-
-
 		return "login";
     }
-
-	/*@PostMapping(value = "login")
-	public ModelAndView loginFine(@ModelAttribute("j_username") String name, @ModelAttribute("j_password") String password) {
-		ModelAndView modelAndView = new ModelAndView();
-
-        User user = (User) userService.getUserByName(name);
-		System.out.println(name);
-
-        modelAndView.addObject("authUser", user);
-		return modelAndView;
-	}*/
 
 	@GetMapping(value = "registration")
 	public String registration(ModelMap model) {
 		model.addAttribute("userForm", new User());
-		//todo
+
 		return "registration";
 	}
 
@@ -82,6 +57,7 @@ public class HelloController {
 		}
 
 		try {
+			user.setRoles(roleService.getAuthorityById(2L));
 			userService.addUser(user);
 		} catch (Exception e) {
 			model.addAttribute("message", "Пользователь с таким именем уже существует");

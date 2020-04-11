@@ -17,8 +17,12 @@
             <form action="/admin/update" method="post">
                 <p>Change User</p>
                 <input type="hidden" name="id" value="${param.id}">
-                <p>New Name</p><input type="text" name="username" value="${param.username}" placeholder="${param.name}">
-                <p>New Pass</p><input type="text" name="password" value="${param.password}" placeholder="${param.pass}">
+                <p>New Name</p><input type="text" name="username" value="${param.username}" >
+                <p>New Pass</p><input type="text" name="password" value="${param.password}" >
+                <p>New Role</p><select name="role">
+                    <option value="1">Admin</option>
+                    <option value="2">User</option>
+                </select>
                 <input class="butt" type="submit" value="Change">
             </form>
     </span>

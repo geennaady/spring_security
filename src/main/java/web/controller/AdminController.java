@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import web.model.User;
+import web.service.RoleService;
 import web.service.UserService;
 
 import java.util.List;
@@ -18,11 +19,14 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @RequestMapping(value = "admin", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         List<User> users = userService.listUsers();
         User user = new User();
-        //todo
+
         model.addAttribute("user", user);
         model.addAttribute("users", users);
 
@@ -30,7 +34,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "admin/add", method = RequestMethod.POST)
-    public ModelAndView saveUser(@ModelAttribute User user) {
+    public ModelAndView saveUser(@ModelAttribute User user, @RequestParam Long role) {
         ModelAndView model = null;
         boolean flag = true;
 
@@ -42,6 +46,7 @@ public class AdminController {
 
         if(flag) {
             try {
+                user.setRoles(roleService.getAuthorityById(role));
                 userService.addUser(user);
                 model = new ModelAndView("redirect:/admin");
             } catch (Exception e) {
@@ -73,23 +78,26 @@ public class AdminController {
     }
 
     @RequestMapping(value = "admin/update", method = RequestMethod.POST)
-    public ModelAndView updateUser(@ModelAttribute User user) {
+    public ModelAndView updateUser(@ModelAttribute User user, @RequestParam Long role) {
         ModelAndView model = null;
         boolean flag = true;
+        System.out.println("" + role);
 
         if (user.getUsername().isEmpty()) {
-            model = new ModelAndView("redirect:/admin/error");
-            model.addObject("message", "Enter the name");
-            flag = false;
+            User userForOldName = (User) userService.getUserById(user.getId());
+            user.setUsername(userForOldName.getUsername());
         }
 
         if(user.getPassword().isEmpty()) {
             User userForPass = (User) userService.getUserById(user.getId());
+            System.out.println("*******************************************" + userForPass.getPassword());
             user.setPassword(userForPass.getPassword());
         }
 
         if(flag) {
+            user.setRoles(roleService.getAuthorityById(role));
             userService.updateUser(user);
+
             model = new ModelAndView("redirect:/admin");
         }
 
