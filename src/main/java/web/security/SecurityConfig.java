@@ -28,26 +28,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Bean
+    /*@Bean
     public UserDetailsService getUserDetailsService() {
         return new MyUserDetailService();
-    }
+    }*/
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(bCryptEncoder());
-    }
-
-    @Bean
-    public RoleService getRoleService() {
-        return new RoleServiceImpl();
-    }
-
-    @Bean
-    public RoleDao getRoleDao() {
-        return new RoleDaoImpl();
     }
 
     @Override

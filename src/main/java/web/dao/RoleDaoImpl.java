@@ -2,12 +2,14 @@ package web.dao;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import web.model.Role;
 
 import javax.persistence.TypedQuery;
 import java.util.HashSet;
 import java.util.Set;
 
+@Repository
 public class RoleDaoImpl implements RoleDao {
     @Autowired
     private SessionFactory sessionFactory;

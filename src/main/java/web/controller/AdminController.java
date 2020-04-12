@@ -19,7 +19,7 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private UserService userService;
-    //test
+
     @Autowired
     private RoleService roleService;
 
@@ -94,8 +94,14 @@ public class AdminController {
             user.setPassword(bCryptEncoder.encode(user.getPassword()));
         }
 
-        user.setRoles(roleService.getAuthorityById(role));
-        userService.updateUser(user);
+        try {
+            user.setRoles(roleService.getAuthorityById(role));
+            userService.updateUser(user);
+            model = new ModelAndView("redirect:/admin");
+        } catch (Exception e) {
+            model = new ModelAndView("redirect:/admin/error");
+            model.addObject("message", "Name already exists");
+        }
 
         return model;
     }
