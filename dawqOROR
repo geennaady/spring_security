@@ -1,0 +1,41 @@
+[33mcommit 4a3bcc3bf15a73aaaf9686ede69872acb9610502[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/rebaseBranch[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mrebaseBranch[m[33m)[m
+Author: qoolhaas <glazachev.g@gmail.com>
+Date:   Sat Apr 11 20:06:49 2020 +0500
+
+    test REBASE branch
+
+[33mcommit 0782234acf62baed0c392af85bd1d2ac29b398aa[m[33m ([m[1;31morigin/testBranch[m[33m, [m[1;32mtestBranch[m[33m)[m
+Author: qoolhaas <glazachev.g@gmail.com>
+Date:   Sat Apr 11 19:35:39 2020 +0500
+
+    testing branch
+
+[33mcommit babecc6902257c75800273c665af194a175c4cde[m
+Author: qoolhaas <glazachev.g@gmail.com>
+Date:   Sat Apr 11 17:34:01 2020 +0500
+
+    refactor
+
+[33mcommit d1426d986cad27ee60a91a0d0628beb75342d871[m
+Author: qoolhaas <glazachev.g@gmail.com>
+Date:   Sat Apr 11 17:24:39 2020 +0500
+
+    Work done. Fix encode trouble, simplified Authenticator
+
+[33mcommit 5558d3b2efe2eaafaf9e86b0d2fe2bcf7591e3fb[m
+Author: qoolhaas <glazachev.g@gmail.com>
+Date:   Sat Apr 11 14:08:06 2020 +0500
+
+    Add Authority
+
+[33mcommit f6ade61a777c30c57980131f3ef619ec78b66ca9[m
+Author: qoolhaas <glazachev.g@gmail.com>
+Date:   Fri Apr 10 20:46:25 2020 +0500
+
+    complete bCrypt
+
+[33mcommit 36f5907e517503e759892f71f2ae0125d1360e57[m
+Author: qoolhaas <glazachev.g@gmail.com>
+Date:   Fri Apr 10 17:29:16 2020 +0500
+
+    Init commit without authority from gitBash
