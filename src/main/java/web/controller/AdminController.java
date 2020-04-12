@@ -22,7 +22,7 @@ public class AdminController {
     //test
     @Autowired
     private RoleService roleService;
-    //test rebase
+
     @Autowired
     private BCryptPasswordEncoder bCryptEncoder;
 
